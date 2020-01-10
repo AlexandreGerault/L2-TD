@@ -94,4 +94,58 @@ L'expression de la puissance est donc simplement
 \emph{Application numérique :} $P = \SI{1875}{\watt}$.
 
 On peut montrer que les formules obtenues peuvent être comparées à celles que l'on obtiendrait en électricité avec le champ électrique $\vv{E}$, le champ de potentiel $\vv{\nabla} V$ et la conductivité électrique $\sigma$ et ainsi définir une \og résistance thermique \fg{} du mur.
+
+En électricité on connait la très célèbre relatio $U=RI$. On définit $I$ comme
+\begin{equation}
+	I = \int_S \vv{J} . \vv{n} \diff{S} = J S
+\end{equation}
+avec
+\begin{equation}
+	J = - \sigma \vv{E} = \sigma \vv{\nabla} V
+\end{equation}
+On a ici une analogie entre $J_Q$ et $J$, avec $\sigma$ la conductivité électrique, $\kappa$ la conductivité thermique, $\vv{E}$ ou $\vv{- \nabla} V$ le champ de potentiel. Ainsi la loi d'ohm peut être utilisé par analogie pour définir $R_\text{th}$ la résistance thermique. La différence de potentiel analogue à $U$ dans notre cas peut se noter sous la forme d'une différence de température $\Delta T$. Ainsi on obtient :
+\begin{equation}
+	R_\text{th} = \frac{\Delta T}{I_Q} = \frac{\Delta T}{J_Q S} = \frac{\Delta T}{\kappa \frac{\Delta T}{e} S} = \frac{e}{\kappa S}
+\end{equation}
+On vérifie la dimension de notre expression. On devrait trouver la dimension
+\begin{equation}
+	[R] = \mathrm{K} [P]^{-1} = \mathrm{K} \mathrm{M}^{-1} \mathrm{L}^{-2} \mathrm{T}^{3}
+\end{equation}
+\begin{equation}
+	[R] 	= \frac{[e]}{[\kappa][S]} 
+		= \frac{\mathrm{L}}{\mathrm{M}\mathrm{L}^1\mathrm{T}^{-3}\mathrm{K}^{-1}  \mathrm{L}^2} 
+		= \frac{\mathrm{L}}{\mathrm{M}\mathrm{L}^3\mathrm{T}^{-3}\mathrm{K}^{-1}}
+		= \mathrm{K}\mathrm{M}^{-1}\mathrm{L}^{-2}\mathrm{T}^{3}
+\end{equation}
+\emph{Application numérique : } $R_\text{th} = \SI{8e-3}{\kelvin\per\watt}$.
+
+\subsection{Application au double vitrage}
+
+On détermine maintenant la valeur numérique de la résistance thermique pour une plaque de verre de surface ${S = \SI{1}{\metre\squared}}$ d'épaisseur ${e=\SI{4}{\milli\metre}}$ et de conductivité thermique ${\kappa = \SI{0.8}{\watt\per\metre\per\kelvin}}$.
+
+\noindent \emph{Application numérique : } $R_\text{th} = \SI{5e-3}{\kelvin\per\watt}$.
+
+Si l'air extérieur est porté à la température de ${T_\text{ext} = \SI{20}{\celsius}}$ et s'il règne une température ${T_\text{int} = \SI{0}{\celsius}}$ à l'extérieur, on peut évaluer la puissance thermique perdu par cette même vitre. Celle-ci correspond à la chaleur qui traverse la section $S$ de la vitre par unité de temps. On a
+\begin{equation}
+	P = J_Q S = -\kappa{\Delta T}{e} \cdot S
+\end{equation}
+On remarque alors que l'on peut réécrire cette équation avec le terme de résistance thermique et on obtient alors :
+\begin{equation}
+	P = \frac{\Delta T}{R_\text{th}}
+\end{equation}
+\emph{Application numérique : } $P_\text{perdue} = \SI{4}{\kilo\watt}$.
+
+On peut ensuite déterminer la valeur numérique de la résistance thermique d'un double vitrage constitué de deux vitres identiques à celle définie précedemment mais d'épaisseur ${e_2 = \SI{2}{\milli\metre}}$ chacune et d'une épaisseur $e_2$ d'air sec de conductivité thermique ${\kappa_2 = \SI{2.6e-2}{\watt\per\metre\per\kelvin}}$. Pour cela, toujours par analogie avec l'électrocinétique on, on additionne les résistances, comme s'il s'agissait de résistances électriques en séries. On obtient alors une résistance équivalentes $R_\text{éq}$
+\begin{equation}
+	\begin{split}
+		R_\text{éq} 	&= 2R_\text{vitre} + R_\text{air}\\
+				&= 2 \left( \frac{e_2}{S\kappa} \right) + \frac{e_2}{S\kappa_2}\\
+		R_\text{éq}	&= \frac{2e_2}{S\kappa} + \frac{e_2}{S\kappa_2}
+	\end{split}
+\end{equation}
+\emph{Application numérique : } $R_\text{éq} = \SI{8e-2}{\kelvin\per\watt}$. On peut alors facilement en déduire la puissance thermique perdue : ${P_\text{perdue} = \SI{244}{\watt}}$. On en conclut donc qu'il est plus utile de réduire la conductivité thermique que d'augmenter l'épaisseur. Ainsi le double vitrage est nettement plus effectif (environ 20 fois) qu'une vitre de la même épaisseur.
+
+\section{Diffusion de neutrons dans un barreau d'Uranium}
+
+
 \end{document}
