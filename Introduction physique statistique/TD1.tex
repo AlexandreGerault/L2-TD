@@ -1,0 +1,97 @@
+\documentclass[a4paper,12pt]{article}
+
+\include{preamble}
+
+\title{Travaux dirigés 1 - Phénomènes de diffusion}
+\author{L2 CUPGE PHYSIQUE}
+\date{Semestre 4}
+
+\begin{document}
+\maketitle
+
+\section{Isolation thermique des maisons}
+
+\subsection{Question de cours}
+
+On rappelle l'expression de la loi élémentaire de Fourier donnant le vecteur densité de courant de chaleur $\vv{J_Q}$.
+\begin{equation}
+	\vv{J_Q} = - \kappa \vv{\nabla} T(M,t)
+\end{equation}
+Dans notre situation on peut se ramener à une étude à une dimension, la température ne dépend alors que de $x$ et $t$ : $T(x,t)$. On obtient donc la relation suivante :
+\begin{equation}
+	\vv{J_Q} = - \kappa \frac{\partial T(x,t)}{\partial x} \vv{u_x}
+\end{equation}
+
+On réalise ensuite un bilan des échanges de chaleur pendant un intervalle de temps $\diff{t}$ sur un petit volume de section $\diff{S}$ et d'épaisseur $\diff{x}$.
+\begin{equation}
+	\begin{split}
+		\delta Q &= \delta Q_\text{entrant} - \delta Q_\text{sortant}\\
+		&= J_Q ( x+\diff{x},t ) \diff{S}\diff{t} - J_Q (x,t) \diff{S}\diff{t}\\
+		&= \left[ J_Q (x+\diff{x},t) - J_Q (x,t) \right] \diff{S}\diff{t}\\
+		\delta Q &= \frac{\partial J_Q (x,t)}{\partial x} \diff{x} \diff{S} \diff{t}
+	\end{split}
+\end{equation}
+
+On cherche alors à monter que la température $T(x,t)$ vérifie l"quation de Fourier $\frac{\partial T(x,t)}{\partial t} = D \frac{\partial^2 T(x,t)}{\partial x^2}$. On utilise pour cela la chaleur spécifique par unité de volume $C$. On peut l'exprimer comme :
+\begin{equation}
+	\begin{split}
+		C &= \frac{C_v}{V}\\
+		  &= \frac{1}{V} \cdot \frac{\diff{U}}{\diff{T}}\\
+		C &= \frac{1}{V} \cdot \frac{\delta Q}{\diff{T}} \text{ car dans notre cas } \delta W = 0
+	\end{split}
+\end{equation}
+
+Ainsi on peut exprimer $\delta Q$ avec cette nouvelle expression. On obtient :
+\begin{equation}
+	\delta Q = C \diff{T} \diff{x}\diff{S}
+\end{equation}
+On obtient donc l'égalité suivante :
+\begin{equation}
+	\delta Q = C \diff{T}\diff{x}\diff{S} = \frac{\partial J_Q (x,t)}{\partial x} \diff{x} \diff{S} \diff{t}
+\end{equation}
+Or d'après la relation de Fourier, ici à une dimension, on sait que 
+\begin{equation}
+	\vv{J_Q} = - \kappa \frac{\partial T(x,t)}{\partial x} \vv{u_x}
+\end{equation}
+En réinjectant ce résultat dans l'expression ci-dessus et en le simplifiant on obtient alors :
+\begin{equation}
+	\frac{\diff{T}}{\diff{t}} = -\frac{\kappa}{C} \frac{\partial^2 T}{\partial x^2}
+\end{equation}
+En posant $D = -\frac{\kappa}{C}$ on obtient le résultat recherché.
+
+Que devient cette équation en régime permanent ? En régime permanent le déséquilibre est créé en continu ainsi on a
+\begin{equation}
+	\frac{\partial^2 T}{\partial x^2} = 0
+\end{equation}
+
+\subsection{Le mur séprare un milieu à la température $T_\text{int}$ (pour $x < 0$) d'un autre milieu à l'intérieur à la température $T_\text{ext}$ (pour $x < e$).}
+
+On détermine, en régime permanent, la répartition de température $T(x)$ à l'intérieur du mur. On suppose $T_\text{int}$ et $T_\text{ext}$ constant, donc que le système est en déséquilibre de façon permanente. On a alors 
+\begin{equation}
+	\frac{\partial^2 T}{\partial x^2} = 0 \Rightarrow T(x) = Ax + B
+\end{equation}
+Sachant $T(0) = T_\text{int}$ on a $B = T_\text{int}$. Ensuite on a $T(e) = T_\text{ext}$ donc on peut calculer $A$ :
+\begin{equation}
+	A = \frac{T_\text{ext} - T_\text{int}}{e}
+\end{equation}
+L'expression de $T(x)$ devient alors
+\begin{equation}
+	T(x) = \frac{T_\text{ext} - T_\text{int}}{e} x + T_\text{int}
+\end{equation}
+On utilise finalement la loi élémentaire de Fourier :
+\begin{equation}
+	J_Q (x) = - \kappa \frac{\partial T(x)}{\partial x} = - \kappa \frac{T_\text{ext} - T_\text{int}}{e}
+\end{equation}
+
+On peut ensuite calculer la puissance qu'il faut fournir au milieu à la température $T$ la plus élevée afin de compenser les pertes de chaleur à travers le mur. Pour cela on rappelle que la puissance est une énergie par unité de temps :
+\begin{equation}
+	P = \frac{\diff{U}}{\diff{t}} = \frac{\delta Q(t)}{\diff{t}} = J_Q (x,t) \cdot S = - \kappa \frac{\frac{T_\text{ext} - T_\text{int}}{e} \cdot S \diff{t}}{\diff{t}}
+\end{equation}
+L'expression de la puissance est donc simplement
+\begin{equation}
+	P = - \kappa \frac{T_\text{ext} - T_\text{int}}{e} \cdot S
+\end{equation}
+\emph{Application numérique :} $P = \SI{1875}{\watt}$.
+
+On peut montrer que les formules obtenues peuvent être comparées à celles que l'on obtiendrait en électricité avec le champ électrique $\vv{E}$, le champ de potentiel $\vv{\nabla} V$ et la conductivité électrique $\sigma$ et ainsi définir une \og résistance thermique \fg{} du mur.
+\end{document}
