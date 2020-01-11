@@ -25,10 +25,10 @@ Dans notre situation on peut se ramener à une étude à une dimension, la temp�
 On réalise ensuite un bilan des échanges de chaleur pendant un intervalle de temps $\diff{t}$ sur un petit volume de section $\diff{S}$ et d'épaisseur $\diff{x}$.
 \begin{equation}
 	\begin{split}
-		\delta Q &= \delta Q_\text{entrant} - \delta Q_\text{sortant}\\
-		&= J_Q ( x+\diff{x},t ) \diff{S}\diff{t} - J_Q (x,t) \diff{S}\diff{t}\\
-		&= \left[ J_Q (x+\diff{x},t) - J_Q (x,t) \right] \diff{S}\diff{t}\\
-		\delta Q &= \frac{\partial J_Q (x,t)}{\partial x} \diff{x} \diff{S} \diff{t}
+		\delta Q	&= \delta Q_\text{entrant} - \delta Q_\text{sortant}\\
+					&= J_Q ( x+\diff{x},t ) \diff{S}\diff{t} - J_Q (x,t) \diff{S}\diff{t}\\
+					&= \left[ J_Q (x+\diff{x},t) - J_Q (x,t) \right] \diff{S}\diff{t}\\
+		\delta Q 	&= \frac{\partial J_Q (x,t)}{\partial x} \diff{x} \diff{S} \diff{t}
 	\end{split}
 \end{equation}
 
@@ -112,7 +112,7 @@ On vérifie la dimension de notre expression. On devrait trouver la dimension
 	[R] = \mathrm{K} [P]^{-1} = \mathrm{K} \mathrm{M}^{-1} \mathrm{L}^{-2} \mathrm{T}^{3}
 \end{equation}
 \begin{equation}
-	[R] 	= \frac{[e]}{[\kappa][S]} 
+	[R]	= \frac{[e]}{[\kappa][S]} 
 		= \frac{\mathrm{L}}{\mathrm{M}\mathrm{L}^1\mathrm{T}^{-3}\mathrm{K}^{-1}  \mathrm{L}^2} 
 		= \frac{\mathrm{L}}{\mathrm{M}\mathrm{L}^3\mathrm{T}^{-3}\mathrm{K}^{-1}}
 		= \mathrm{K}\mathrm{M}^{-1}\mathrm{L}^{-2}\mathrm{T}^{3}
@@ -139,13 +139,52 @@ On peut ensuite déterminer la valeur numérique de la résistance thermique d'u
 \begin{equation}
 	\begin{split}
 		R_\text{éq} 	&= 2R_\text{vitre} + R_\text{air}\\
-				&= 2 \left( \frac{e_2}{S\kappa} \right) + \frac{e_2}{S\kappa_2}\\
-		R_\text{éq}	&= \frac{2e_2}{S\kappa} + \frac{e_2}{S\kappa_2}
+						&= 2 \left( \frac{e_2}{S\kappa} \right) + \frac{e_2}{S\kappa_2}\\
+		R_\text{éq}		&= \frac{2e_2}{S\kappa} + \frac{e_2}{S\kappa_2}
 	\end{split}
 \end{equation}
 \emph{Application numérique : } $R_\text{éq} = \SI{8e-2}{\kelvin\per\watt}$. On peut alors facilement en déduire la puissance thermique perdue : ${P_\text{perdue} = \SI{244}{\watt}}$. On en conclut donc qu'il est plus utile de réduire la conductivité thermique que d'augmenter l'épaisseur. Ainsi le double vitrage est nettement plus effectif (environ 20 fois) qu'une vitre de la même épaisseur.
 
 \section{Diffusion de neutrons dans un barreau d'Uranium}
 
+\subsection{Bilan des échanges de neutrons et équation aux dérivées partielles}
 
+On commence par écrire le bilan des échanges de neutrons. On comprend que le problème traite d'une diffusion de densité volumique (une concentration donc) et qu'il produit également des neutrons. On peut donc écrire le bilan des échanges de neutrons de la manière suivante :
+\begin{equation}
+	\delta {N} = \delta N_\text{entrant} - \delta N_\text{sortant} + \delta N_\text{créé}
+\end{equation}
+Or on sait d'après le cours que le nombre de neutrons entrant dans le volume élémentaire cylindrique de section $S$ pendant un temps $\diff{t}$ est
+\begin{equation}
+	\delta_\text{entrant} = j_c (x,t) S \diff{t}
+\end{equation}
+et de manière analogue on a également le nombre de neutrons sortant
+\begin{equation}
+	\delta_\text{sortant} = j_c (x+\diff{x}, t) S \diff{t}
+\end{equation}
+alors que le nombre de neutrons créés dans le volume élémentaire cylindrique nous est donné par la relation $Kc(x,t)S\diff{x}\diff{T}$. On obtient ainsi la relation
+\begin{equation}
+	\begin{split}
+		\delta N	&= \delta N_\text{entrant} - \delta N_\text{sortant} + \delta N_\text{créé}\\
+					&= j_c (x,t) S \diff{t} - j_c (x+\diff{x}, t) S \diff{t} + Kc(x,t)S\diff{x}\diff{t}\\
+					&= \left[ j_c (x,t) - j_c (x+\diff{x},t) \right] S \diff{t} + Kc(x,t) S \diff{x}\diff{t}\\
+					&= \big( \left[ j_c (x,t) - j_c (x+\diff{x},t) \right] + Kc(x,t)\diff{x}\big)S\diff{t}\\
+		\delta N	&= \left[ \frac{\partial j_c (x,t)}{\partial x} + Kc(x,t) \right] \diff{x} S \diff{t}
+	\end{split}
+\end{equation}
+On peut également écrire ce bilan d'échange en fonction du temps, en déterminant le nombre de neutrons à l'instant $t$ puis à l'instant $t+\diff{t}$. On obtient donc
+\begin{equation}
+	\begin{split}
+		\delta N	&= \delta N_{t+\diff{t}} - \delta N_\text{t}\\
+					&= c(x,t+\diff{t}) S\diff{x} - c(x,t) S\diff{x}\\
+					&= \frac{\partial c(x,t)}{\partial t} \diff{t} S \diff{x}
+	\end{split}
+\end{equation}
+Ayant calculé la même quantité de deux manières différentes on obtient une égalité :
+\begin{equation}
+	\left[ \frac{\partial j_c (x,t)}{\partial x} + Kc(x,t) \right] \diff{x} S \diff{t} = \frac{\partial c(x,t)}{\partial t} \diff{t} S \diff{x}
+\end{equation}
+Or d'après la loi de Fick on sait que
+\begin{equation}
+	\vv{\jmath_c} (x,t) = -D \vv{\nabla} c(x,t)
+\end{equation}
 \end{document}
